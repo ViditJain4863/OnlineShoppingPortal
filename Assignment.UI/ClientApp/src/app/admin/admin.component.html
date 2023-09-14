@@ -1,0 +1,82 @@
+<div class="container" style="width: 100%;">    
+   <div class="row">
+     <div class="col-sm-4">
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center;">Users: <span class="glyphicon glyphicon-user"></span></div>
+         <div class="panel-body">
+            Total Count : {{usersCount}}
+            <br>
+            Males: {{maleCount}}    Female: {{femaleCount}}
+         </div>       
+       </div>
+     </div>
+     <div class="col-sm-4"> 
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center">Products: <span class="glyphicon glyphicon-th-list"></span></div>
+         <div class="panel-body">Total Count : {{productCount}} <br><br></div>
+       </div>
+     </div>
+     <div class="col-sm-4"> 
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center">Categories: <span class="glyphicon glyphicon-th-large"></span></div>
+         <div class="panel-body">Total Count : {{categoriesCount}} <br><br></div>
+       </div>
+     </div>
+   </div>   
+   <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+        <div class="panel-heading" style="text-align: center;">Orders In Cart: <span class="glyphicon glyphicon-shopping-cart"></span></div>
+        <div class="panel-body">
+          Total Count: {{ordersAdded}}
+          <br>
+        </div>
+      </div>
+    </div>
+     <div class="col-sm-3">
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center;">Orders Placed : <span class="glyphicon glyphicon-ok"></span></div>
+         <div class="panel-body">
+          Total Count: {{ordersPlaced}}
+          <br>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-3"> 
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center;">Orders Shipped : <span class="glyphicon glyphicon-plane"></span></div>
+         <div class="panel-body">
+          Total Count: {{ordersShipped}}
+          <br>
+          </div>
+       </div>
+     </div>
+     <div class="col-sm-3"> 
+       <div class="panel panel-primary" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+         <div class="panel-heading" style="text-align: center;">Orders Delivered : <span class="glyphicon glyphicon-road"></span></div>
+         <div class="panel-body">
+          Total Count: {{ordersDelievered}}
+          <br> 
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+ <br><br>
+
+
+<table class="table table-bordered" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;;">
+   <thead>
+      <tr style="text-align: center; background-color: aqua;">
+         <th>Product Added on {{todayDate}}</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let product of productsList"> 
+        <li>{{product.productName}} made in {{product.productCountry}}  with the base price of {{product.productPrice}} under the category of {{product.productCategory}}</li>
+      </tr>
+      <tr *ngFor="let category of categoriesList"> 
+        <li>{{category.categoryName}} --- {{category.categoryDescription}}</li>
+      </tr>
+   </tbody>
+</table>

@@ -1,0 +1,54 @@
+import { Component, OnInit , Input } from '@angular/core';
+interface carosuelImages{
+  imageSrc:string;
+  imageAlt:string;
+}
+@Component({
+  selector: 'app-carosuel',
+  templateUrl: './carosuel.component.html',
+  styleUrls: ['./carosuel.component.css']
+})
+export class CarosuelComponent implements OnInit {
+  @Input() images:carosuelImages[] = []
+  @Input() indicators = true;
+  @Input() controls = true;
+  @Input() autoSlide = false;
+  @Input() slideInterval = 3000; //default to 3sec
+  selectedIndex =0;
+  constructor() { }
+
+  ngOnInit(): void {
+    if(this.autoSlide){
+      this.autoSlideImages();
+    }
+  }
+  
+  autoSlideImages():void{
+    setInterval(() => {
+      this.onNextClick();
+    }, this.slideInterval)
+  }
+
+  // sets index of image on dot/indicator click
+  selectImage(index:number):void{
+    this.selectedIndex = index;
+  }
+
+  onPrevClick():void {
+    if(this.selectedIndex === 0){
+      this.selectedIndex = this.images.length-1;
+    }
+    else{
+      this.selectedIndex--;
+    }
+  }
+
+  onNextClick():void{
+    if(this.selectedIndex === this.images.length-1){
+      this.selectedIndex = 0;
+    }
+    else{
+      this.selectedIndex++;
+    }
+  }
+}

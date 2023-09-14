@@ -1,0 +1,32 @@
+<table class="table table-bordered" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;;">
+    <thead>
+       <tr style="text-align: center; background-color: aqua;">
+          <th>S.No</th>
+          <th>Product Image</th>
+          <th>Product Name</th>
+          <th>Product Category</th>
+          <th>Product Price</th>
+          <th></th>
+       </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let list of cartList,let y=index">
+        <td>{{y+1}}</td>
+        <td><img src="{{list.productImage}}" class="img-responsive" style="border-radius:50%; width:120px; height: 120px;" alt="Image"></td>
+        <td>{{list.productName}}</td>
+        <td>{{list.productCategory}}</td>
+        <td>{{list.productPrice |currency:'INR'}}</td>
+        <td>
+          <a [routerLink]="" (click)="singlePlaceOrder(list)" class="btn btn-sm btn-danger mb-2" style="margin-right: 10px;"><i class="glyphicon glyphicon-ok"></i> Order Now </a>
+          <a [routerLink]="" (click)="delete(list.id!)" class="btn btn-sm btn-danger mb-2"><i class="glyphicon glyphicon-trash"></i> Remove from Cart </a>
+        </td>
+      </tr>   
+    </tbody>
+</table>
+<div class="grandTotal" style="text-align: end; padding: 10px 230px 0px 0px;">
+    <b>Grand Total : {{totalPrice |currency:'INR'}}</b>
+</div>
+<br/><br/>
+<!-- <div class="grandTotal" style="text-align: center;">
+    <button (click)="entirePlaceOrder()">Place All Order</button>
+</div> -->

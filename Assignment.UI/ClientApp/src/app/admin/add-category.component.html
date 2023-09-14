@@ -1,0 +1,32 @@
+<div class="card">  
+    <h4 class="card-header" style="background-color: lightblue; text-align: center;">Add New Category 
+       <img src="{{categoryLogo}}" style="width:100px;height: 100px; mix-blend-mode: overlay;"/>
+    </h4>
+    <div class="card-body" style="padding: 1rem 2rem;">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">CategoryName</label>
+                    <input title="CategoryName" type="text" formControlName="categoryName" class="form-control" [placeholder]="cNameLbl"   [ngClass]="{ 'is-invalid': submitted && f.categoryName.errors}" />
+                    <div *ngIf="submitted && f.categoryName.errors" class="invalid-feedback">
+                        <div *ngIf="f.categoryName.errors.required">Category Name is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">CategoryDescription</label>
+                    <input title="CategoryDescription" type="text" formControlName="categoryDescription" class="form-control" [placeholder]="cDescLbl"  [ngClass]="{ 'is-invalid': submitted && f.categoryDescription.errors }" />
+                    <div *ngIf="submitted && f.categoryDescription.errors" class="invalid-feedback">
+                        <div *ngIf="f.categoryDescription.errors.required">Category Description is required</div>
+                    </div> 
+                </div>
+            </div>
+            <div class="mb-3" style="text-align: center; margin-top: 2%;">
+                <button type="submit" [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Save
+                </button>
+                <a routerLink="/admin/category" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

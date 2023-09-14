@@ -1,0 +1,137 @@
+<style>
+    
+    .circles{
+      height: 0.938em;
+      width: 0.938em;
+      border: 0.188em solid #000;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .active{
+        background-color:#ffa500;
+    }
+    
+    .circle-desc-active{
+    font-weight: bold;
+    }
+    
+    .bar{
+      width: 16%;
+      height: 0.063em;
+      margin-bottom:0.469em;
+      border: 0.031em solid #000;
+      color:#000;
+      background-color:#000;
+      display: inline-block;
+      text-align:center;
+      margin:"0 auto";
+    }
+    
+    .containerProgress{
+      min-width:130px;
+      margin: "0px auto";
+      text-align: center;
+    }
+    
+    .circle-desc{
+     position: absolute;
+     top:7.000em;
+     font-size: 1.125em;
+     width: auto;
+     max-width:9.375em;
+     margin-left:-0.750em;
+    }
+    .circle-descc{
+     position: absolute;
+     top:9.000em;
+     font-size: 1.125em;
+     width: auto;
+     max-width:9.375em;
+     margin-left:-0.750em;
+    }
+    </style>
+    
+
+  
+<span *ngFor="let list of cartList,let y=index">
+    <div class="container">    
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary" style="box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
+                    <div class="panel-heading">
+                        <div class="row" style="display: block;">
+                            <div class="orderLbl" style="margin-left: 5%; display: inline;">
+                                <span> Order Placed </span>
+                            </div>
+                            <div class="totalLbl" style="margin-left: 11%; display: inline;">
+                                <span> Total </span>
+                            </div>
+                            <div class="shipToLbl" style="margin-left: 15%; display: inline;">
+                                <span> Ship To </span>
+                            </div>
+                        </div>
+                        <div class="row" style="display: block;">
+                            <div class="orderValue" style="margin-left: 5%; display: inline;">
+                                <span>{{list.productCartPlaced |date :'dd-MMM-yyyy'}}</span>
+                            </div>
+                            <div class="totalValue" style="margin-left: 10%; display: inline;">
+                                <span> {{list.productPrice | currency :'INR'}} </span>
+                            </div>
+                            <div class="shipToValue" style="margin-left: 11%;display: inline;">
+                                <span> {{userValue?.firstName | uppercase}} {{userValue?.lastName | uppercase}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="display: block;">
+                            <div class="containerProgress">
+                                <span *ngFor="let item of counts;let i = index">
+                                    <span class="circle-desc" [class.circle-desc-active]="list.cartStatus == item">{{ item }}</span>
+                                    <span *ngIf="list.cartStatus == 'Purchased'">
+                                        <span *ngIf="item == 'Added'">
+                                            <span class="circle-descc">{{list.productCartAdd |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Purchased'">
+                                            <span class="circle-descc">{{list.productCartPlaced |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                    </span>
+                                    <span *ngIf="list.cartStatus == 'Shipped'">
+                                        <span *ngIf="item == 'Added'">
+                                            <span class="circle-descc">{{list.productCartAdd |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Purchased'">
+                                            <span class="circle-descc">{{list.productCartPlaced |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Shipped'">
+                                            <span class="circle-descc">{{list.productCartShipped |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                    </span>
+                                    <span *ngIf="list.cartStatus == 'Dispatched'">
+                                        <span *ngIf="item == 'Added'">
+                                            <span class="circle-descc">{{list.productCartAdd |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Purchased'">
+                                            <span class="circle-descc">{{list.productCartPlaced |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Shipped'">
+                                            <span class="circle-descc">{{list.productCartShipped |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                        <span *ngIf="item == 'Dispatched'">
+                                            <span class="circle-descc">{{list.productCartDispatch |date :'dd-MMM-yyyy'}}</span>
+                                        </span>
+                                    </span>
+                                    <span class="circles" [class.active]="list.cartStatus == item"></span>
+                                    <span class="bar" *ngIf="(i != counts.length-1)"></span>
+                                </span>
+                                <img src="{{list.productImage}}" class="img-responsive" style="border-radius:50%; width:120px; height: 120px; margin: -10px 0px 0px 30px;" alt="Image">
+                                <span style="margin-top: 1%; margin-left:5%; float: left;">{{list.productName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</span>    
+   

@@ -1,0 +1,147 @@
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<script src="./assets/js/appComponent.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-expand-custom navbar-mainbg" style="box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;">
+    <div *ngIf="!user">
+        <img src="{{logo}}" style="border-radius:50%; width:60px;height: 60px; align-self: center;"/>  
+    </div>
+
+    <!-- Checking if user is logged in or not and if logged in , then only showing particular options in menubar -->
+    <div *ngIf="user">
+
+        <!-- Code for checking user role and assigning particular options for it  -->
+        <div class="navbar-nav" *ngIf="userRole != adminValueCheck">
+            <img src="{{logo}}" routerLink="/" style="border-radius:50%; width:60px;height: 60px; align-self: center;"/>  
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto" style="align-items: center;">  
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="padding: 30px 20px;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/item/clothes" routerLinkActive="active" style="padding: 30px 20px;">Clothes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/item/electronic" routerLinkActive="active" style="padding: 30px 20px;">Electronics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/item/furniture" routerLinkActive="active" style="padding: 30px 20px;">Furniture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/item/mobile" routerLinkActive="active" style="padding: 0px 15px;">Mobile Phones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/item/computer" routerLinkActive="active" style="padding: 0px 5px;">Computer Accessories</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto" style="float: right; align-items: center;">
+                    <span class="material-symbols-outlined" routerLink="/user/profile" style="font-size: 30px; padding: 0px 0px 0px 130px; ">supervised_user_circle</span>
+                    <span class="material-symbols-outlined" routerLink="/cart" style="font-size: 30px; padding: 0px 0px 0px 20px;">shopping_cart_checkout</span>
+                    <span class="material-symbols-outlined" routerLink="/order" style="font-size: 30px; padding: 0px 0px 0px 20px;">local_shipping</span>
+                    <span class="material-icons" style="font-size: 30px; padding: 0px 0px 0px 20px;"><a (click)="logout()">logout</a></span>
+                </ul>
+                &nbsp;&nbsp;
+
+                <!-- Code for adding a countdown timer -->
+                <div class="timer">
+                    <span id="minutes" style="margin-bottom: 20px; padding: 16px 15px 16px 10px; background-color: floralwhite;
+                    border: 1px solid transparent; border-radius: 4px; text-align: center;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;"> 
+                        {{minutesToDday}} 
+                    </span> &nbsp; 
+
+                    <span><b>:</b></span>&nbsp;&nbsp;&nbsp;
+
+                    <span id="seconds" style="margin-bottom: 20px; padding: 16px 15px 16px 10px; background-color: floralwhite;
+                    border: 1px solid transparent;
+                    border-radius: 4px; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;"> 
+                        {{secondsToDday}} 
+                    </span>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Code for checking admin role and assigning particular options for it  -->
+        <div class="navbar-nav" *ngIf="userRole == adminValueCheck">
+            <img src="{{logo}}" routerLink="/admin" style="border-radius:50%; width:60px;height: 60px; align-self: center;"/>   
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto" style="align-items: center;">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin/product" routerLinkActive="active">Add Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin/category" routerLinkActive="active">Add Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/admin/pList" routerLinkActive="active">Product List</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto" style="float: right; align-items: center;">
+                    <span class="material-symbols-outlined" routerLink="/project" style="font-size: 30px; padding: 0px 0px 0px 380px; ">supervised_user_circle</span>
+                    <span class="material-icons" style="font-size: 30px; padding: 0px 0px 0px 20px;"><a (click)="logout()">logout</a></span>
+                </ul>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+
+                
+                <!-- Code for adding a countdown timer -->
+                <div class="timer">
+
+                    <span id="minutes" style="margin-bottom: 20px; padding: 10px 10px 10px 8px; background-color: floralwhite;
+                    border: 1px solid transparent; border-radius: 4px; text-align: center;
+                    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;"> 
+                        {{minutesToDday}} 
+                    </span> &nbsp; 
+                    
+                    <span><b>:</b></span>&nbsp;
+
+                    <span id="seconds" style="margin-bottom: 20px; padding: 10px 10px 10px 8px; background-color: floralwhite;
+                    border: 1px solid transparent; border-radius: 4px; 
+                    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;"> 
+                        {{secondsToDday}} 
+                    </span>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div> 
+          
+</nav>
+
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+
+<div *ngIf="user">
+    <footer class="container-fluid text-center" style="left:0;bottom: 100%; width: 100%; background-color: #5161ce; color: white; text-align: center;">
+        <br>
+        <p>VJ Store Copyright</p>  
+        <form class="form-inline">Get deals:
+          <input type="email" class="form-control" size="50" placeholder="Email Address">
+          <button type="button" class="btn btn-danger">Sign Up</button>
+          <br><br>
+        </form>
+    </footer>
+</div>
+
+
+ 
+  
+ 

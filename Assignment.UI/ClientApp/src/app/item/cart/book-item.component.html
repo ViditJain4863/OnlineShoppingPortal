@@ -1,0 +1,143 @@
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        
+        <div class="progress-bar">
+            <div class="step">
+               <p>Address</p>
+               <div class="bullet" *ngIf="steps > 1" style="background-color: green;"> <span>1</span> </div>
+               <div class="bullet" *ngIf="steps == 1"> <span>1</span> </div>
+               <div class="check material-symbols-outlined" *ngIf="steps>1"><span class="material-symbols-outlined">done</span></div>
+            </div>
+            <div class="step">
+               <p>Address</p>
+               <div class="bullet" *ngIf="steps > 2" style="background-color: green;"> <span>2</span> </div>
+               <div class="bullet" *ngIf="steps<=2"> <span>2</span> </div>
+               <div class="check material-symbols-outlined" *ngIf="steps>2" style="left: 44%;"><span class="material-symbols-outlined">done</span></div>
+            </div>
+            <div class="step">
+               <p>Payment</p>
+               <div class="bullet" *ngIf="steps > 3" style="background-color: green;"> <span>3</span> </div>
+               <div class="bullet" *ngIf="steps<=3"> <span>3</span> </div>
+               <div class="check material-symbols-outlined" *ngIf="steps>3" style="left:63%"><span class="material-symbols-outlined">done</span></div>
+            </div>
+            <div class="step">
+               <p>Submit</p>
+               <div class="bullet"><span>4</span></div>
+            </div>
+        </div>
+
+
+        <div class="container tb-10">
+            <div *ngIf="steps == 1">
+                <h4>Address</h4>
+
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">FirstName</label>
+                        <input title="FirstName" type="text" formControlName="firstName" class="form-control" [placeholder]="fNameLbl"   [ngClass]="{ 'is-invalid': submitted && f.firstName.errors}" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">FirstName is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col">
+                        <label class="form-label">LastName</label>
+                        <input title="LastName" type="text" formControlName="lastName" class="form-control" [placeholder]="lNameLbl"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">LastName is required</div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">House/Door No.</label>
+                        <input title="HouseNo" type="text" formControlName="houseNo" class="form-control" [placeholder]="houseNoLbl" [ngClass]="{ 'is-invalid': submitted && f.houseNo.errors }" />
+                        <div *ngIf="submitted && f.houseNo.errors" class="invalid-feedback">
+                            <div *ngIf="f.houseNo.errors.required">House Number is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col">
+                        <label class="form-label">Address Line 1</label>
+                        <input title="AddressLine1" type="number" formControlName="addressLine1" class="form-control" [placeholder]="addressLine1Lbl" [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }" />
+                        <div *ngIf="submitted && f.addressLine1.errors" class="invalid-feedback">
+                            <div *ngIf="f.addressLine1.errors.required">Address Line1 is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col">
+                        <label class="form-label">Address Line 2</label>
+                        <input title="AddressLine2" type="text" formControlName="addressLine2" class="form-control" [placeholder]="addressLine2Lbl" [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }" />
+                        <div *ngIf="submitted && f.addressLine2.errors" class="invalid-feedback">
+                            <div *ngIf="f.addressLine2.errors.required">Address Line2 is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col">
+                        <label class="form-label">City</label>
+                        <input title="City" type="number" formControlName="city" class="form-control" [placeholder]="cityLbl" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                            <div *ngIf="f.city.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        <div *ngIf="steps == 2">
+            <h4> Contact Details</h4>
+            <div class="form-group">
+                <label for="emailAddress">Email</label>
+                <input type="text" class="form-control" id="emailAddress" aria-describedby="emailAddress" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" class="form-control" id="contactNumber" placeholder="Contact Number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Address">
+            </div>
+        </div>
+
+        <div *ngIf="steps == 3">
+            <h4>Payment Options</h4>
+            <!-- <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control">
+                    <option value="null">Select One Any</option>
+                    <option value="male">Male</option>
+                    <option value="female">female</option>
+                </select>
+            </div> -->
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    Education
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="NetBanking">
+                    <label class="form-check-label" for="inlineRadio1">NetBanking</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="UPI">
+                    <label class="form-check-label" for="inlineRadio2">UPI</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Credit Card">
+                    <label class="form-check-label" for="inlineRadio3">Credit Card</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="Debit Card">
+                    <label class="form-check-label" for="inlineRadio1">Debit Card</label>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary mx-2" (click)="previousStep()" *ngIf="steps !=1">Previous</a>
+        <button type="submit" class="btn btn-primary mx-2" *ngIf="steps !=3">Next</button>
+        <button type="submit" class="btn btn-primary mx-2" *ngIf="steps ==3">Submit</button>
+    </div>
+    </form>
+

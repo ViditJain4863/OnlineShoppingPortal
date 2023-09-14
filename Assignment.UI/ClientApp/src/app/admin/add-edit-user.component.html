@@ -1,0 +1,76 @@
+<div class="card">  
+    <h4 class="card-header" style="background-color: aquamarine; text-align: center;">Edit Info
+       <img src="{{signUpLogo}}" style="width:100px;height: 100px;"/>
+    </h4>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">FirstName</label>
+                    <input title="FirstName" type="text" formControlName="firstName" class="form-control" [placeholder]="fNameLbl"   [ngClass]="{ 'is-invalid': submitted && f.firstName.errors}" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">FirstName is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">LastName</label>
+                    <input title="LastName" type="text" formControlName="lastName" class="form-control" [placeholder]="lNameLbl"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">LastName is required</div>
+                    </div> 
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Email Address</label>
+                    <input title="EmailAddress" type="text" formControlName="emailAddress" class="form-control" [placeholder]="emailAddLbl" [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" />
+                    <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                        <div *ngIf="f.emailAddress.errors.required">Email Address is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">PinCode</label>
+                    <input title="Pincode" type="number" formControlName="pincode" class="form-control" [placeholder]="pincodeLbl" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }" />
+                    <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                        <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Username</label>
+                    <input title="Username" type="text" formControlName="username" class="form-control" [placeholder]="uNameLbl" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Country</label>
+                    <input title="Country" type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                        <div *ngIf="f.country.errors.required">Country is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">Mobile Number</label>
+                    <input title="MobileNumber" type="number" formControlName="mobileNumber" class="form-control" [placeholder]="mobileNumLbl" [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }" />
+                    <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobileNumber.errors.required">Password is required</div>
+                    </div>
+                </div>
+            </div> 
+            <div style="text-align: center; margin-top: 5%;">
+                <button type="submit" title="updateBtn" [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

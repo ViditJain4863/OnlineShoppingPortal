@@ -1,0 +1,52 @@
+
+<!-- Code for filtering list based on username , status code , category -->
+<div class="container" style="background-color:beige;width:100%;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;;">
+  <h4 style="text-align: center;">Filter By</h4> <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>UserName : </span><input type="text" [(ngModel)]="userNm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>Category : </span><input type="text" [(ngModel)]="categoryNm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>Status : </span><input type="text" [(ngModel)]="statusNm"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button (click)="onClearFilters()">x Clear Filters</button><br/> <br/>
+  <div style="text-align: center;">
+    <button type="submit" (click)="onfilter()">Filter</button>
+  </div>
+  <br/><br/>
+</div>
+<br/>
+
+
+<!-- Displaying list for the admin, so he can track the list which are place, so that he can sent it for shipment, and mark it delievered. -->
+<table class="table table-bordered" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;;">
+  <thead>
+     <tr style="text-align: center; background-color: aqua;">
+        <th>S.No</th>
+        <th>Product Name</th>
+        <th>Product Image</th>
+        <th>Product Category</th>
+        <th>product Price</th>
+        <th>User</th>
+        <th>Product Status</th>
+        <th></th>
+     </tr>
+  </thead>
+  <tbody> 
+    <tr *ngFor="let cart of cartListDisplay,let y=index">
+      <td>{{y+1}}</td>
+      <td>{{cart.productName}}</td>
+      <td><img src="{{cart.productImage}}" class="img-responsive" style="border-radius:50%; width:120px; height: 120px;" alt="Image"></td>
+      <td>{{cart.productCategory}}</td>
+      <td>{{cart.productPrice}}</td>
+      <td>{{cart.userName}}</td>
+      <td>{{cart.cartStatus}}</td>
+      <td>
+        <div *ngIf="cart.cartStatus=='Purchased'">
+          <button (click)="changeStatus(cart)">Sent it for Shippment</button>
+        </div>
+        <div *ngIf="cart.cartStatus=='Shipped'">
+          <button (click)="changeStatus(cart)">Mark it delievered</button>
+        </div>      
+      </td>
+    </tr>   
+  </tbody>
+</table>
+
+
